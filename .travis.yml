@@ -1,0 +1,34 @@
+language: julia
+os:
+- linux
+julia:
+- 0.6
+notifications:
+  email: false
+git:
+  depth: 99999999
+cache:
+  timeout: 1000
+  directories:
+  - downloads
+env:
+  global:
+  - BINARYBUILDER_DOWNLOADS_CACHE=downloads
+  - BINARYBUILDER_AUTOMATIC_APPLE=true
+sudo: required
+before_script:
+- julia -e 'Pkg.clone("https://github.com/JuliaPackaging/BinaryProvider.jl")'
+- julia -e 'Pkg.clone("https://github.com/JuliaPackaging/BinaryBuilder.jl"); Pkg.build()'
+script:
+- julia build_tarballs.jl
+deploy:
+  provider: releases
+  api_key:
+    secure: MZWL7dQRCaHKo2pMdPvpTtgvB0MBcSYQdpU/qHW/gvh5PN4SaDiTBkArcpD6W+M2fJUQd9QIcrkgv22QGRKB5fCaxq79FIyd7P7Lt0MgpZyQ4cqZvyPGe9ZLqUszCd/yrWiqCqKxVvBE/XA33kTBzLGwOG7ff1JnAQim2SYMsXxBQygamyh4CyKYpnywM0UnBCWdRb+22HBW4qtPQMCILnI8IAlgSFky2zv0uvG8IGJYC3+I8fLZkd6EkPcJ0zUdC16hSv+SDRYcmC0j5KX2K2v3fQOTY2zqDCWDRvvvFrvpfHXK8MekFNtMR+ZEBi+S76T2LNh4PEJgY4E5CQiJpRVyn1NNWSyITRFYK2rJhBPPnuroG25OiHd5AGZuKhjWyA/E6jkB3wzWxRSLJ5n5fMdF29D8/sF5oslwkpGxf5T7NEpvIoZeVVu6FpavNkJim4FewZHtUyXv0bDQdeuMuRE/tfghc8pgcei6DJo1rwx2oDgFNaCFISj0Y0vZS+KosXWJp4ICpN/RAtNnQrSSlZNcuqBZ7rifxoHSowX7g5Fg4VZXg5yGQEk0b/SebpkPIWQSq4SbRbjP9QriOoZ+jQPwlBhNIF9r/eoapFgmzcCS9YijJ0KU/+MNZvQTdGtwjkg0L14EXlh94e89O8Xsfum2EC3TwZyq0UVq40dlR1E=
+  api_key: "$OATH_TOKEN"
+  file_glob: true
+  file: products/*
+  skip_cleanup: true
+  on:
+    repo: JuliaIO/LibVorbisBuilder
+    tags: true
