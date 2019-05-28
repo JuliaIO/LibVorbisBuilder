@@ -37,6 +37,8 @@ platforms = [
     # musl
     Linux(:i686, :musl),
     Linux(:x86_64, :musl),
+    Linux(:aarch64, :musl),
+    Linux(:armv7l, :musl),
 
     # The BSD's
     FreeBSD(:x86_64),
@@ -50,7 +52,7 @@ products(prefix) = [
 
 # Dependencies that must be installed before this package can be built
 dependencies = [
-    "https://github.com/staticfloat/OggBuilder/releases/download/v1.3.3-6/build_Ogg.v1.3.3.jl"
+    "https://github.com/staticfloat/OggBuilder/releases/download/v1.3.3-7/build_Ogg.v1.3.3.jl"
 ]
 
 
