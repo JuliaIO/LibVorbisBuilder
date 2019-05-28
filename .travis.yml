@@ -32,4 +32,3 @@ deploy:
   skip_cleanup: true
   on:
     repo: JuliaIO/LibVorbisBuilder
-    tags: true
