@@ -37,7 +37,7 @@ platforms = [
     # musl
     Linux(:i686, :musl),
     Linux(:x86_64, :musl),
-    Linux(:aarch64, :musl),
+    #Linux(:aarch64, :musl),
     Linux(:armv7l, :musl),
 
     # The BSD's
